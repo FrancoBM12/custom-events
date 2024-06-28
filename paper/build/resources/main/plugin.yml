@@ -1,0 +1,4 @@
+name: CustomEvents
+main: io.github.francobm12.customevents.PluginLauncher
+api-version: 1.18
+version: 1.0.0
