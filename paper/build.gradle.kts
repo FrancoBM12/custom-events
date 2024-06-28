@@ -1,6 +1,5 @@
 plugins{
     java
-    kotlin("jvm")
 }
 
 repositories {
@@ -10,7 +9,6 @@ repositories {
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:1.18.2-R0.1-SNAPSHOT")
-    implementation(kotlin("stdlib-jdk8"))
 }
 
 java {
