@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/paper/CustomEvents.paper.main.iml" filepath="$PROJECT_DIR$/.idea/modules/paper/CustomEvents.paper.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/paper/IdeaProjects.CustomEvents.paper.main.iml" filepath="$PROJECT_DIR$/.idea/modules/paper/IdeaProjects.CustomEvents.paper.main.iml" />
     </modules>
   </component>
 </project>
