@@ -9,7 +9,7 @@ public class PluginLauncher extends JavaPlugin {
 
     @Override
     public void onEnable() {
-
+        this.getLogger().info("Enabling plugin...");
     }
 
     @Override
