@@ -81,19 +81,14 @@ public class FileCreator extends YamlConfiguration {
 
     public Component getComponent(String path) {
         String s = super.getString(path);
-        if(s == null) {
-            //plugin.getLogger().warning("This is only a warning: The path(" + path + ") is null in file '" + getFileName());
-            return null;
-        }
+        if(s == null) return ComponentHelper.asComponent("{ invalid message key }");
         return ComponentHelper.asComponent(s);
     }
 
     public Component getComponent(String path, String... replacements) {
         if(replacements == null) return getComponent(path);
         String s = super.getString(path);
-        if(s == null) {
-            return ComponentHelper.asComponent("{ invalid message key }");
-        }
+        if(s == null) return ComponentHelper.asComponent("{ invalid message key }");
         return ComponentHelper.asComponent(StringHelper.replace(s, replacements));
     }
 
