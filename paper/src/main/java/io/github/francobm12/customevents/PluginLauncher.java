@@ -14,7 +14,7 @@ public class PluginLauncher extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        this.getLogger().info("Disabling plugin...");
+        this.getLogger().info("Disabling plugin... XD");
 
     }
 
