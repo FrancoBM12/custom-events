@@ -1,0 +1,4 @@
+settings:
+  countdown:
+    amount: 60 # <--- in seconds
+    notify: "60, 50, 20, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1" # <-- .i.

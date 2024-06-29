@@ -1,2 +1,5 @@
-rootProject.name="CustomEvents"
-include("paper")
+rootProject.name = "CustomEvents"
+include(
+    "api",
+    "paper"
+)
