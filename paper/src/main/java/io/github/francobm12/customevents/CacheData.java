@@ -1,7 +1,7 @@
 package io.github.francobm12.customevents;
 
 
-import io.github.francobm12.customevents.builder.Buildable;
+import io.github.francobm12.api.builder.Buildable;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 

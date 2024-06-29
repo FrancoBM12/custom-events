@@ -1,4 +1,4 @@
-package io.github.francobm12.customevents.events;
+package io.github.francobm12.api.events;
 
 public interface EventState {
 
