@@ -7,6 +7,7 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +19,7 @@ public class FileCreator extends YamlConfiguration {
     private final String fileName;
     private final Plugin plugin;
     private final File file;
+    private static final String invalidPath = "{ invalid message key }";
 
     public FileCreator(Plugin plugin, String filename, String fileExtension, File folder){
         this.plugin = plugin;
@@ -79,35 +81,31 @@ public class FileCreator extends YamlConfiguration {
         }
     }
 
-    public Component getComponent(String path) {
-        String s = super.getString(path);
-        if(s == null) return ComponentHelper.asComponent("{ invalid message key }");
-        return ComponentHelper.asComponent(s);
+    public Component asComponent(final @Nullable  String path, final @Nullable String... replacements) {
+        if(path == null || path.isEmpty()) {
+            return ComponentHelper.asComponent(FileCreator.invalidPath);
+        }
+
+        final String result = super.getString(path);
+        if(result == null) {
+            return ComponentHelper.asComponent(FileCreator.invalidPath);
+        }
+
+        final String contentResult = replacements == null ? result : StringHelper.replace(result, replacements);
+        return ComponentHelper.asComponent(contentResult);
     }
 
-    public Component getComponent(String path, String... replacements) {
-        if(replacements == null) return getComponent(path);
-        String s = super.getString(path);
-        if(s == null) return ComponentHelper.asComponent("{ invalid message key }");
-        return ComponentHelper.asComponent(StringHelper.replace(s, replacements));
-    }
+    public List<Component> asComponentList(final @Nullable String path, final @Nullable String... replacements) {
+        final List<Component> components = new ArrayList<>();
+        if (path == null || path.isEmpty()) {
+            return components;
+        }
 
-    public List<Component> getComponentList(String path) {
-        List<String> list = super.getStringList(path);
-        List<Component> components = new ArrayList<>();
-
-        list.forEach(line -> components.add(ComponentHelper.asComponent(line)));
-
-        return components;
-    }
-
-    public List<Component> getComponentList(String path, String... replacements) {
-        if(replacements == null) return getComponentList(path);
-
-        List<String> list = super.getStringList(path);
-        List<Component> components = new ArrayList<>();
-
-        list.forEach(line -> components.add(ComponentHelper.asComponent(StringHelper.replace(line, replacements))));
+        final List<String> arrayContents = this.getStringList(path);
+        for (final String inputLine : arrayContents) {
+            final String componentContent = replacements == null ? inputLine : StringHelper.replace(inputLine, replacements);
+            components.add(ComponentHelper.asComponent(componentContent));
+        }
 
         return components;
     }

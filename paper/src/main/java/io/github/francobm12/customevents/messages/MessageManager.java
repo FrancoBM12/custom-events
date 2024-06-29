@@ -21,7 +21,7 @@ public class MessageManager {
     }
 
     public @NotNull Component content(final @NotNull String messageKey, final @Nullable String... replacements) {
-        return configuration.getComponent(messageKey, replacements);
+        return configuration.asComponent(messageKey, replacements);
     }
 
     /*
@@ -32,7 +32,7 @@ public class MessageManager {
      * */
 
     public @NotNull List<Component> contents(final @NotNull String messageKey, final @Nullable String... replacements) {
-        return configuration.getComponentList(messageKey, replacements);
+        return configuration.asComponentList(messageKey, replacements);
     }
 
     /*
@@ -48,8 +48,10 @@ public class MessageManager {
             final @NotNull String messageKey,
             final @Nullable String... replacements
     ) {
-        final List<Component> messages = this.configuration.getComponentList(messageKey, replacements);
-        messages.forEach(player::sendMessage);
+        final List<Component> messages = this.configuration.asComponentList(messageKey, replacements);
+        for (Component message : messages) {
+            player.sendMessage(message);
+        }
     }
 
     /*
