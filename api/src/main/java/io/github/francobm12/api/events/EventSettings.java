@@ -1,6 +1,6 @@
-package io.github.francobm12.customevents.events;
+package io.github.francobm12.api.events;
 
-import io.github.francobm12.customevents.numerics.Numeric;
+import io.github.francobm12.api.numerics.Numeric;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 

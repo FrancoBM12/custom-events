@@ -1,6 +1,5 @@
 package io.github.francobm12.customevents;
 
-import io.github.francobm12.customevents.builder.Buildable;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;

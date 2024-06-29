@@ -1,4 +1,4 @@
-package io.github.francobm12.customevents.numerics;
+package io.github.francobm12.api.numerics;
 
 public class IntNumeric implements Numeric {
 

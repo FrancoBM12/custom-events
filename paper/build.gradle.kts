@@ -18,6 +18,7 @@ tasks {
         archiveBaseName.set(rootProject.name)
         archiveVersion.set("${rootProject.version}")
 
+        relocate("io.github.francobm12.api", "io.github.francobm12.customevents.api")
     }
 }
 

@@ -1,11 +1,10 @@
-package io.github.francobm12.customevents.builder.types;
+package io.github.francobm12.api.builder.types;
 
-import io.github.francobm12.customevents.builder.Buildable;
+import io.github.francobm12.api.builder.Buildable;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.Contract;
