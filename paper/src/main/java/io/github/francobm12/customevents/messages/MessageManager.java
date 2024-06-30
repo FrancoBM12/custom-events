@@ -15,7 +15,6 @@ import java.util.List;
 public class MessageManager {
 
     private final FileCreator configuration;
-
     public MessageManager(final @NotNull FileCreator configuration) {
         this.configuration = configuration;
     }
@@ -24,24 +23,9 @@ public class MessageManager {
         return configuration.asComponent(messageKey, replacements);
     }
 
-    /*
-     *
-     * @param messageKey   so
-     * @param replacements so
-     *
-     * */
-
     public @NotNull List<Component> contents(final @NotNull String messageKey, final @Nullable String... replacements) {
         return configuration.asComponentList(messageKey, replacements);
     }
-
-    /*
-    *
-    * @param player       so
-    * @param messageKey   so
-    * @param replacements so
-    *
-    * */
 
     public void sendMany(
             final @NotNull Player player,
@@ -50,14 +34,6 @@ public class MessageManager {
     ) {
         this.configuration.asComponentList(messageKey, replacements).forEach(player::sendMessage);
     }
-
-    /*
-     *
-     * @param player       so
-     * @param messageKey   so
-     * @param replacements so
-     *
-     * */
 
     public void sendClickable(
             final @NotNull Player player,

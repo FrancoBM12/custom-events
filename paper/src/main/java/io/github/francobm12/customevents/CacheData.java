@@ -2,6 +2,7 @@ package io.github.francobm12.customevents;
 
 
 import io.github.francobm12.api.builder.Buildable;
+import io.github.francobm12.customevents.helper.StringHelper;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +26,11 @@ public record CacheData(
 
         public Builder countdownAmount(int countdownAmount) {
             this.countdownAmount = countdownAmount;
+            return this;
+        }
+
+        public Builder countdownNotifications(String countdownNotifications) {
+            this.countdownNotifications = StringHelper.stringToIntegerSet(countdownNotifications);
             return this;
         }
 

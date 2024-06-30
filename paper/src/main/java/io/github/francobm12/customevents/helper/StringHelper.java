@@ -1,8 +1,34 @@
 package io.github.francobm12.customevents.helper;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class StringHelper {
+
+    public static @NotNull @Unmodifiable Set<Integer> stringToIntegerSet(final @Nullable String content) {
+        if (content == null || content.isEmpty()) {
+            return Set.of();
+        }
+
+        final Set<Integer> result = new HashSet<>();
+        final String[] parts = content.split(",");
+
+        for (final String part : parts) {
+            try {
+                final int number = Integer.parseInt(part);
+                result.add(number);
+            } catch (NumberFormatException e) {
+                // Ignore non-integer parts
+            }
+        }
+
+        return result;
+    }
 
     public static @NotNull String replace(final String message, String... objects) {
         if (message == null || message.isEmpty()) {

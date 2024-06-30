@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PluginLauncher extends JavaPlugin {
 
+    private CacheData cacheData;
     private FileCreator messageFile;
 
     @Override
@@ -16,6 +17,11 @@ public class PluginLauncher extends JavaPlugin {
 
         this.messageFile = FileCreator.createFile(this, "messages");
         this.saveDefaultConfig();
+
+        this.cacheData = CacheData.builder()
+                .countdownAmount(this.messageFile.getInt("settings.countdown.amount"))
+                .countdownNotifications(this.messageFile.getString("settings.countdown.notify"))
+                .build();
 
     }
 
