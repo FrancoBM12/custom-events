@@ -48,10 +48,7 @@ public class MessageManager {
             final @NotNull String messageKey,
             final @Nullable String... replacements
     ) {
-        final List<Component> messages = this.configuration.asComponentList(messageKey, replacements);
-        for (Component message : messages) {
-            player.sendMessage(message);
-        }
+        this.configuration.asComponentList(messageKey, replacements).forEach(player::sendMessage);
     }
 
     /*
