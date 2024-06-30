@@ -7,6 +7,8 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -16,16 +18,23 @@ import java.util.logging.Level;
 
 public class FileCreator extends YamlConfiguration {
 
+    private static final String INVALID_PATH = "{ invalid message key }";
+
     private final String fileName;
     private final Plugin plugin;
     private final File file;
-    private static final String invalidPath = "{ invalid message key }";
 
-    public FileCreator(Plugin plugin, String filename, String fileExtension, File folder){
+
+    public FileCreator(Plugin plugin, @NotNull String filename, String fileExtension, File folder){
         this.plugin = plugin;
         this.fileName = filename + (filename.endsWith(fileExtension) ? "" : fileExtension);
         this.file = new File(folder, this.fileName);
         this.createFile();
+    }
+
+    @Contract("_, _ -> new")
+    public static @NotNull FileCreator createFile(final @NotNull Plugin plugin, final @NotNull String filename) {
+        return new FileCreator(plugin, filename);
     }
 
     public FileCreator(Plugin plugin, String fileName) {
@@ -52,19 +61,22 @@ public class FileCreator extends YamlConfiguration {
                 } else {
                     this.save(file);
                 }
+
                 this.load(file);
                 return;
             }
-            this.load(file);
 
+            this.load(file);
             this.save(file);
         } catch (InvalidConfigurationException | IOException e) {
             e.printStackTrace();
         }
     }
-    public void saveDefault(){
+
+    public void saveDefault() {
         this.plugin.saveResource(this.fileName, false);
     }
+
     public void save() {
         try {
             this.save(file);
@@ -82,17 +94,39 @@ public class FileCreator extends YamlConfiguration {
     }
 
     public Component asComponent(final @Nullable  String path, final @Nullable String... replacements) {
-        if(path == null || path.isEmpty()) {
-            return ComponentHelper.asComponent(FileCreator.invalidPath);
+        if (path == null || path.isEmpty()) {
+            return ComponentHelper.asComponent(INVALID_PATH);
         }
 
         final String result = super.getString(path);
-        if(result == null) {
-            return ComponentHelper.asComponent(FileCreator.invalidPath);
+        if (result == null) {
+            return ComponentHelper.asComponent(INVALID_PATH);
         }
 
         final String contentResult = replacements == null ? result : StringHelper.replace(result, replacements);
         return ComponentHelper.asComponent(contentResult);
+    }
+
+    public List<Component> asComponentList(final @Nullable String path, final int replaceAtIndex, final @Nullable String... replacements) {
+        final List<Component> components = new ArrayList<>();
+        if (path == null || path.isEmpty()) {
+            return components;
+        }
+
+        final List<String> arrayContents = this.getStringList(path);
+        for (int index = 0; index < arrayContents.size(); index++) {
+            final String content = arrayContents.get(index);
+            if (index != replaceAtIndex) {
+                components.add(ComponentHelper.asComponent(content));
+                continue;
+            }
+
+            final String componentContent = replacements == null ? content : StringHelper.replace(content, replacements);
+            components.add(ComponentHelper.asComponent(componentContent));
+
+        }
+
+        return components;
     }
 
     public List<Component> asComponentList(final @Nullable String path, final @Nullable String... replacements) {
